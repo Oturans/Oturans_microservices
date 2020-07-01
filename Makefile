@@ -1,7 +1,49 @@
 USER_NAME = oturans
+GCP_PROJECT = docker-275905
+
+ 
+kuber-5: gke-create helm-install nginx-install prometheus-install grafana-install reddit-start
+
+#---------------------------------------------------Terraform GKE
+
+gke-create:
+	cd kubernetes/terraform && terraform init
+	cd kubernetes/terraform && terraform apply -auto-approve
+	gcloud container clusters get-credentials my-gke-cluster --zone us-central1 --project $(GCP_PROJECT)
+
+gke-destroy:
+	cd kubernetes/terraform && terraform destroy
+
+#----------------------------------------------------Helm Install
+helm-install:
+	cd kubernetes/reddit && kubectl apply -f tiller.yml
+	cd kubernetes/reddit && helm init --service-account tiller
+	sleep 20
+
+#---------------------------------------------------Nginx
+nginx-install:
+	helm upgrade nginx stable/nginx-ingress --install
+
+
+#----------------------------------------------------Prometheus
+prometheus-install:
+	cd kubernetes/Charts/prometheus && helm upgrade prom . -f custom_values.yml --install
+
+
+#----------------------------------------------------Grafana
+grafana-install:
+	helm upgrade --install grafana stable/grafana --set "server.adminPassword=admin" \
+		--set "server.service.type=NodePort" \
+		--set "server.ingress.enabled=true" \
+		--set "server.ingress.hosts={reddit-grafana}"
+
+#----------------------------------------------------reddit-test
+reddit-start:
+	cd kubernetes/Charts && helm upgrade reddit-test ./reddit --install
+	cd kubernetes/Charts && helm upgrade production --namespace production ./reddit --install
+	cd kubernetes/Charts && helm upgrade staging --namespace staging ./reddit --install
 
 #---------------------------------------------------system
-
 ip-mon:
 	docker-machine ip docker-host
 ip-lpg:

@@ -14,6 +14,9 @@ resource "google_container_cluster" "primary" {
   node_locations = [
     "us-central1-c"
   ]
+  enable_legacy_abac = true
+  logging_service    = "none"
+  monitoring_service = "none"
 
   # We can't create a cluster with no node pool defined, but we want to only use
   # separately managed node pools. So we create the smallest possible default
@@ -33,9 +36,9 @@ resource "google_container_cluster" "primary" {
     http_load_balancing {
       disabled = false
     }
-    kubernetes_dashboard {
-      disabled = false
-    }
+    # kubernetes_dashboard {
+    #   disabled = false
+    # }
   }
 }
 
@@ -48,7 +51,7 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
 
   node_config {
     preemptible  = true
-    machine_type = "g1-small"
+    machine_type = "n1-standard-2"
     disk_size_gb = "20"
 
     metadata = {

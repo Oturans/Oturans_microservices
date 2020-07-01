@@ -838,7 +838,7 @@ https://github.com/fabric8io/fabric8/issues/6840
 
     В итоге мы получим, при пуше в ветку мастер любого из наших приложений{ui|post|comment} после сборки образов и загрузки их в registry будет запускаться pipeline выкатки на production  
 
-[34]:https://github.com/Otus-DevOps-2020-02/Oturans_microservices/tree/kubernetes-4/kubernetes/charts/gitlabci/.gitlab-ci-ui.yml
-[35]:https://github.com/Otus-DevOps-2020-02/Oturans_microservices/tree/kubernetes-4/kubernetes/charts/gitlabci/.gitlab-ci-comment.yml
-[36]:https://github.com/Otus-DevOps-2020-02/Oturans_microservices/tree/kubernetes-4/kubernetes/charts/gitlabci/.gitlab-ci-post.yml
-[37]:https://github.com/Otus-DevOps-2020-02/Oturans_microservices/tree/kubernetes-4/kubernetes/charts/gitlabci/.gitlab-ci-reddit.yml
+[34]:https://raw.githubusercontent.com/Otus-DevOps-2020-02/Oturans_microservices/kubernetes-4/kubernetes/Charts/gitlabci/.gitlab-ci-ui.yml
+[35]:https://raw.githubusercontent.com/Otus-DevOps-2020-02/Oturans_microservices/kubernetes-4/kubernetes/Charts/gitlabci/.gitlab-ci-comment.yml
+[36]:https://raw.githubusercontent.com/Otus-DevOps-2020-02/Oturans_microservices/kubernetes-4/kubernetes/Charts/gitlabci/.gitlab-ci-post.yml
+[37]:https://raw.githubusercontent.com/Otus-DevOps-2020-02/Oturans_microservices/kubernetes-4/kubernetes/Charts/gitlabci/.gitlab-ci-reddit.yml

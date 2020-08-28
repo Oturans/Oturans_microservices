@@ -12,11 +12,12 @@
       }
     ]
   },
+  "description": "All HTTP Requests that ui service receives",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 3,
-  "iteration": 1594010157246,
+  "id": 2,
+  "iteration": 1594009374617,
   "links": [],
   "panels": [
     {
@@ -24,7 +25,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -40,7 +41,7 @@
         "y": 0
       },
       "hiddenSeries": false,
-      "id": 2,
+      "id": 6,
       "legend": {
         "avg": false,
         "current": false,
@@ -67,9 +68,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(post_count{kuebernetes_namespace=~\"$namespace\"}[1h]",
+          "expr": "histogram_quantile(0.95, sum(rate(ui_request_response_time_bucket{path=\"/\",kubernetes_namespace=~\"$namespace\"}[5m])) by (le))",
           "format": "time_series",
-          "hide": true,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -80,7 +80,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "rate(post_count[1h]",
+      "title": "histogram_quantile(0.95)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -165,7 +165,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(comment_count{kubernetes_namespace=~\"namespace\"}[5m])",
+          "expr": "rate(ui_request_count{http_status=~\"^[45].*\",kubernetes_namespace=~\"$namespace\"}[1m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -177,7 +177,104 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "rate(comment_count[1h])",
+      "title": "UI Requests With Error",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "rate(ui_request_count{kubernetes_namespace=~\"$namespace\"}[5m])",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Ui Requests",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -215,7 +312,7 @@
       }
     }
   ],
-  "refresh": "10s",
+  "refresh": "5s",
   "schemaVersion": 25,
   "style": "dark",
   "tags": [],
@@ -317,7 +414,7 @@
     ]
   },
   "timezone": "",
-  "title": "Business_Logic_Monitoring",
-  "uid": "dhIfVNmGk",
-  "version": 4
+  "title": "Ui HTTP Requests",
+  "uid": "ZhvwOrkMz",
+  "version": 10
 }

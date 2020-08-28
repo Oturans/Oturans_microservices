@@ -842,3 +842,25 @@ https://github.com/fabric8io/fabric8/issues/6840
 [35]:https://raw.githubusercontent.com/Otus-DevOps-2020-02/Oturans_microservices/kubernetes-4/kubernetes/Charts/gitlabci/.gitlab-ci-comment.yml
 [36]:https://raw.githubusercontent.com/Otus-DevOps-2020-02/Oturans_microservices/kubernetes-4/kubernetes/Charts/gitlabci/.gitlab-ci-post.yml
 [37]:https://raw.githubusercontent.com/Otus-DevOps-2020-02/Oturans_microservices/kubernetes-4/kubernetes/Charts/gitlabci/.gitlab-ci-reddit.yml
+
+# Kubernetes-5
+
+
+1. Скорректирован Terraform-проект для развертывания Kubernetes кластера под Kubernetes-5  
+
+2. Развернут Prometheus.
+
+    Настройки для чарта: custom_values.yml
+
+3. В custom_values.yml добавлены таргеты на: ui, comment, post.  
+
+4. Развернута Grafana.  
+
+5. Добавлены дашборды:  
+
+    monitoring/grafana/dashboards/Business_Logic_Monitoring.json  
+    monitoring/grafana/dashboards/UI_HTTP_Requests.json  
+
+в указанные дашборды добавлена Env-переменной, значение namepspace.  
+
+6. Разворачивание обязательной части Kuber-5, через Makefile  
